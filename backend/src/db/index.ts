@@ -17,7 +17,7 @@ class Database {
       connectionTimeoutMillis: 2000,
     });
 
-    this.pool.on('error', (err) => {
+    this.pool.on('error', (err: Error) => {
       logger.error('Unexpected database error', err);
     });
   }
@@ -27,7 +27,7 @@ class Database {
       const client = await this.pool.connect();
       logger.info('Database connected successfully');
       client.release();
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Failed to connect to database', error);
       throw error;
     }
@@ -40,7 +40,7 @@ class Database {
       const duration = Date.now() - start;
       logger.debug('Executed query', { text, duration, rows: result.rowCount });
       return result;
-    } catch (error) {
+    } catch (error: any) {
       logger.error('Query error', { text, error });
       throw error;
     }
