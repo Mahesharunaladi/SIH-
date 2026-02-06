@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  min-height: 100vh;
+  background-color: #f7fafc;
+}
+
+/* Global button hover effects */
+button:hover:not(:disabled),
+a:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Smooth transitions */
+button,
+a {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Form elements */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #48bb78;
+  box-shadow: 0 0 0 3px rgba(72, 187, 120, 0.1);
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+  .app {
+    font-size: 14px;
+  }
+}
