@@ -53,9 +53,10 @@ CREATE TABLE IF NOT EXISTS supply_chain_events (
     description TEXT,
     metadata JSONB,
     data_hash VARCHAR(64) NOT NULL,
-    blockchain_tx_id UUID,
+    blockchain_tx_id UUID REFERENCES blockchain_transactions(id) ON DELETE SET NULL,
     verified BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Blockchain Transactions Table
@@ -83,7 +84,8 @@ CREATE TABLE IF NOT EXISTS certificates (
     document_hash VARCHAR(64) NOT NULL,
     document_url TEXT,
     verified BOOLEAN DEFAULT FALSE,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Audit Logs Table
@@ -125,4 +127,10 @@ CREATE TRIGGER update_profiles_updated_at BEFORE UPDATE ON profiles
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 CREATE TRIGGER update_products_updated_at BEFORE UPDATE ON products
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_supply_chain_events_updated_at BEFORE UPDATE ON supply_chain_events
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_certificates_updated_at BEFORE UPDATE ON certificates
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
