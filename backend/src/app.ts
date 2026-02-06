@@ -25,16 +25,25 @@ class App {
   }
 
   private initializeMiddlewares(): void {
-    // Security middleware
-    this.app.use(helmet());
-
-    // CORS
+    // CORS - Must be before other middleware
     this.app.use(
       cors({
         origin: config.cors.origin,
         credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        exposedHeaders: ['Content-Range', 'X-Content-Range'],
+        maxAge: 600, // 10 minutes
       })
     );
+
+    // Handle preflight requests
+    this.app.options('*', cors());
+
+    // Security middleware
+    this.app.use(helmet({
+      crossOriginResourcePolicy: { policy: "cross-origin" }
+    }));
 
     // Body parsing
     this.app.use(express.json({ limit: '10mb' }));
