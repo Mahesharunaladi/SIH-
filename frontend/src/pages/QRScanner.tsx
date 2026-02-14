@@ -41,12 +41,12 @@ const QRScanner = () => {
   };
 
   const handleCameraScan = () => {
-    setError('Camera scanning requires additional setup with a QR scanning library.');
+    setError('Camera scanning requires additional setup with a QR scanning library (e.g., html5-qrcode, @zxing/browser).');
     // In production, integrate with libraries like:
     // - react-qr-scanner
     // - html5-qrcode
     // - @zxing/browser
-    setIsScanning(true);
+    setIsScanning(false);
   };
 
   return (
@@ -106,6 +106,11 @@ const QRScanner = () => {
         </div>
 
         {error && <div style={styles.error}>{error}</div>}
+        
+        <div style={styles.notice}>
+          <strong>ℹ️ Note:</strong> Camera scanning requires additional setup with a QR scanning library 
+          (html5-qrcode, @zxing/browser, or react-qr-scanner). Use manual entry for now.
+        </div>
       </div>
 
       <div style={styles.infoCard}>
@@ -276,6 +281,16 @@ const styles: { [key: string]: React.CSSProperties } = {
     color: '#c53030',
     borderRadius: '8px',
     textAlign: 'center',
+  },
+  notice: {
+    marginTop: '1.5rem',
+    padding: '1rem',
+    backgroundColor: '#bee3f8',
+    color: '#2c5282',
+    borderRadius: '8px',
+    textAlign: 'center',
+    fontSize: '0.9rem',
+    lineHeight: '1.6',
   },
   infoCard: {
     backgroundColor: 'white',
