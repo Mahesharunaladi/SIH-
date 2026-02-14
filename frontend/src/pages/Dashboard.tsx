@@ -96,31 +96,108 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Quick Actions */}
+      {/* Quick Actions - Role-Based */}
       <div style={styles.section}>
         <h2 style={styles.sectionTitle}>Quick Actions</h2>
         <div style={styles.actionsGrid}>
-          {(user?.role === 'farmer' || user?.role === 'manufacturer' || user?.role === 'admin') && (
-            <Link to="/products/create" style={styles.actionCard}>
-              <div style={styles.actionIcon}>➕</div>
-              <div style={styles.actionLabel}>Add New Product</div>
-            </Link>
+          {user?.role === 'consumer' ? (
+            <>
+              <Link to="/scan" style={{...styles.actionCard, borderColor: '#10b981'}}>
+                <div style={styles.actionIcon}>🔍</div>
+                <div style={styles.actionLabel}>Scan QR Code</div>
+                <p style={styles.actionDesc}>Verify product authenticity</p>
+              </Link>
+              <Link to="/trace" style={styles.actionCard}>
+                <div style={styles.actionIcon}>📜</div>
+                <div style={styles.actionLabel}>Trace Products</div>
+                <p style={styles.actionDesc}>View supply chain history</p>
+              </Link>
+            </>
+          ) : user?.role === 'farmer' ? (
+            <>
+              <Link to="/products/create" style={{...styles.actionCard, borderColor: '#22c55e'}}>
+                <div style={styles.actionIcon}>🌱</div>
+                <div style={styles.actionLabel}>Add Harvest</div>
+                <p style={styles.actionDesc}>Register new harvest</p>
+              </Link>
+              <Link to="/products" style={styles.actionCard}>
+                <div style={styles.actionIcon}>📦</div>
+                <div style={styles.actionLabel}>My Products</div>
+                <p style={styles.actionDesc}>View harvested products</p>
+              </Link>
+            </>
+          ) : user?.role === 'manufacturer' ? (
+            <>
+              <Link to="/products/create" style={{...styles.actionCard, borderColor: '#8b5cf6'}}>
+                <div style={styles.actionIcon}>⚗️</div>
+                <div style={styles.actionLabel}>Create Batch</div>
+                <p style={styles.actionDesc}>Process raw materials</p>
+              </Link>
+              <Link to="/products" style={{...styles.actionCard, borderColor: '#ec4899'}}>
+                <div style={styles.actionIcon}>📱</div>
+                <div style={styles.actionLabel}>Generate QR</div>
+                <p style={styles.actionDesc}>Create tracking codes</p>
+              </Link>
+            </>
+          ) : user?.role === 'processor' ? (
+            <>
+              <Link to="/products/create" style={{...styles.actionCard, borderColor: '#f59e0b'}}>
+                <div style={styles.actionIcon}>🔄</div>
+                <div style={styles.actionLabel}>Process Product</div>
+                <p style={styles.actionDesc}>Add processing event</p>
+              </Link>
+              <Link to="/products" style={styles.actionCard}>
+                <div style={styles.actionIcon}>📊</div>
+                <div style={styles.actionLabel}>Track Batches</div>
+                <p style={styles.actionDesc}>Monitor processing</p>
+              </Link>
+            </>
+          ) : user?.role === 'distributor' ? (
+            <>
+              <Link to="/products" style={{...styles.actionCard, borderColor: '#14b8a6'}}>
+                <div style={styles.actionIcon}>🚚</div>
+                <div style={styles.actionLabel}>Track Shipments</div>
+                <p style={styles.actionDesc}>Monitor distribution</p>
+              </Link>
+              <Link to="/trace" style={styles.actionCard}>
+                <div style={styles.actionIcon}>📍</div>
+                <div style={styles.actionLabel}>Update Location</div>
+                <p style={styles.actionDesc}>Log distribution events</p>
+              </Link>
+            </>
+          ) : user?.role === 'retailer' ? (
+            <>
+              <Link to="/products" style={{...styles.actionCard, borderColor: '#6366f1'}}>
+                <div style={styles.actionIcon}>🏪</div>
+                <div style={styles.actionLabel}>Verify Stock</div>
+                <p style={styles.actionDesc}>Check received products</p>
+              </Link>
+              <Link to="/trace" style={styles.actionCard}>
+                <div style={styles.actionIcon}>✅</div>
+                <div style={styles.actionLabel}>Confirm Receipt</div>
+                <p style={styles.actionDesc}>Log receipt events</p>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/products/create" style={styles.actionCard}>
+                <div style={styles.actionIcon}>➕</div>
+                <div style={styles.actionLabel}>Add Product</div>
+              </Link>
+              <Link to="/products" style={styles.actionCard}>
+                <div style={styles.actionIcon}>📋</div>
+                <div style={styles.actionLabel}>All Products</div>
+              </Link>
+              <Link to="/trace" style={styles.actionCard}>
+                <div style={styles.actionIcon}>🔍</div>
+                <div style={styles.actionLabel}>Trace Products</div>
+              </Link>
+              <Link to="/profile" style={styles.actionCard}>
+                <div style={styles.actionIcon}>👤</div>
+                <div style={styles.actionLabel}>My Profile</div>
+              </Link>
+            </>
           )}
-          
-          <Link to="/products" style={styles.actionCard}>
-            <div style={styles.actionIcon}>📋</div>
-            <div style={styles.actionLabel}>View All Products</div>
-          </Link>
-
-          <Link to="/trace" style={styles.actionCard}>
-            <div style={styles.actionIcon}>🔍</div>
-            <div style={styles.actionLabel}>Trace Products</div>
-          </Link>
-
-          <Link to="/profile" style={styles.actionCard}>
-            <div style={styles.actionIcon}>👤</div>
-            <div style={styles.actionLabel}>My Profile</div>
-          </Link>
         </div>
       </div>
 
@@ -264,13 +341,21 @@ const styles: { [key: string]: React.CSSProperties } = {
     color: '#2d3748',
     transition: 'transform 0.2s, box-shadow 0.2s',
     cursor: 'pointer',
+    border: '2px solid transparent',
   },
   actionIcon: {
-    fontSize: '3rem',
-    marginBottom: '1rem',
+    fontSize: '2.5rem',
+    marginBottom: '0.5rem',
   },
   actionLabel: {
-    fontWeight: '500',
+    fontWeight: 'bold',
+    fontSize: '1rem',
+    marginBottom: '0.25rem',
+  },
+  actionDesc: {
+    fontSize: '0.85rem',
+    color: '#718096',
+    marginTop: '0.25rem',
   },
   emptyState: {
     backgroundColor: 'white',
