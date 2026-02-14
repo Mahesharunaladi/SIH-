@@ -7,6 +7,8 @@ import {
   login,
   getProfile,
   updateProfile,
+  verifyEmail,
+  resendVerification,
   registerSchema,
   loginSchema,
 } from '../controllers/authController';
@@ -16,6 +18,8 @@ const router = express.Router();
 // Public routes
 router.post('/register', validateBody(registerSchema), asyncHandler(register));
 router.post('/login', validateBody(loginSchema), asyncHandler(login));
+router.post('/verify-email', asyncHandler(verifyEmail));
+router.post('/resend-verification', asyncHandler(resendVerification));
 
 // Protected routes
 router.get('/profile', authenticate, asyncHandler(getProfile));

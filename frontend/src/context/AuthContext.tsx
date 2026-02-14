@@ -7,7 +7,7 @@ interface AuthContextType {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
-  register: (data: any) => Promise<void>;
+  register: (data: any) => Promise<any>;
   logout: () => void;
   updateUser: (user: User) => void;
   isAuthenticated: boolean;
@@ -47,6 +47,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setToken(response.token);
     localStorage.setItem('token', response.token);
     localStorage.setItem('user', JSON.stringify(response.user));
+    return response; // Return the full response including message
   };
 
   const logout = () => {

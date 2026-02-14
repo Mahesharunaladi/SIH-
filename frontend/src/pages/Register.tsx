@@ -14,6 +14,7 @@ const Register = () => {
     address: '',
   });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { register } = useAuth();
   const navigate = useNavigate();
@@ -25,11 +26,26 @@ const Register = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setIsLoading(true);
 
     try {
-      await register(formData);
-      navigate('/dashboard');
+      const response = await register(formData);
+      setSuccess(response.message || 'Registration successful! Please check your email to verify your account.');
+      // Clear form
+      setFormData({
+        email: '',
+        password: '',
+        name: '',
+        role: 'farmer',
+        organization: '',
+        phone: '',
+        address: '',
+      });
+      // Redirect after 3 seconds
+      setTimeout(() => {
+        navigate('/login?registered=true');
+      }, 3000);
     } catch (err: any) {
       setError(err.response?.data?.error || 'Registration failed. Please try again.');
     } finally {
@@ -44,6 +60,7 @@ const Register = () => {
         <p style={styles.subtitle}>Join HerbTrace Platform</p>
 
         {error && <div style={styles.error}>{error}</div>}
+        {success && <div style={styles.success}>{success}</div>}
 
         <form onSubmit={handleSubmit} style={styles.form}>
           <div style={styles.formGroup}>
@@ -186,6 +203,14 @@ const styles: { [key: string]: React.CSSProperties } = {
     padding: '0.75rem',
     borderRadius: '4px',
     marginBottom: '1rem',
+  },
+  success: {
+    backgroundColor: '#c6f6d5',
+    color: '#22543d',
+    padding: '0.75rem',
+    borderRadius: '4px',
+    marginBottom: '1rem',
+    textAlign: 'center',
   },
   form: {
     display: 'flex',
