@@ -54,4 +54,20 @@ export const config = {
     level: process.env.LOG_LEVEL || 'info',
     dir: process.env.LOG_DIR || './logs',
   },
+
+  // Email Configuration
+  email: {
+    host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+    port: parseInt(process.env.EMAIL_PORT || '587', 10),
+    secure: process.env.EMAIL_SECURE === 'true', // true for 465, false for other ports
+    user: process.env.EMAIL_USER || '',
+    password: process.env.EMAIL_PASSWORD || '',
+    from: process.env.EMAIL_FROM || 'noreply@herbtrace.com',
+    fromName: process.env.EMAIL_FROM_NAME || 'HerbTrace',
+  },
+
+  // Frontend URL
+  frontend: {
+    url: process.env.FRONTEND_URL || 'http://localhost:5173',
+  },
 };

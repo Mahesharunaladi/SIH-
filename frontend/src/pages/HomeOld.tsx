@@ -6,7 +6,7 @@ const Home = () => {
 
   return (
     <div style={styles.container}>
-      {/* Hero Section with Botanical Background */}
+   
       <div style={styles.hero}>
         <div style={styles.heroOverlay} />
         <div style={styles.heroContent}>
@@ -49,7 +49,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* How HerbTrace Works Section */}
+    
       <div style={styles.howItWorks}>
         <h2 style={styles.sectionTitle}>How HerbTrace Works</h2>
         <p style={styles.sectionSubtitle}>
@@ -101,7 +101,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Choose Your Role Section */}
+      
       <div style={styles.rolesSection}>
         <h2 style={styles.sectionTitle}>Choose Your Role</h2>
         <p style={styles.sectionSubtitle}>
@@ -150,7 +150,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* CTA Section */}
+      
       <div style={styles.cta}>
         <div style={styles.ctaContent}>
           <h2 style={styles.ctaTitle}>Start Tracing with HerbTrace</h2>
