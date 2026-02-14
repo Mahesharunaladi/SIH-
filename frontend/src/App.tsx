@@ -10,6 +10,7 @@ import ProductsList from './pages/ProductsList';
 import CreateProduct from './pages/CreateProduct';
 import TracePage from './pages/TracePage';
 import Profile from './pages/Profile';
+import QRScanner from './pages/QRScanner';
 import './App.css';
 
 function App() {
@@ -46,6 +47,15 @@ function App() {
               element={
                 <ProtectedRoute allowedRoles={['farmer', 'manufacturer', 'admin']}>
                   <CreateProduct />
+                </ProtectedRoute>
+              }
+            />
+            
+            <Route
+              path="/scan"
+              element={
+                <ProtectedRoute>
+                  <QRScanner />
                 </ProtectedRoute>
               }
             />

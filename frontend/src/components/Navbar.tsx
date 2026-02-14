@@ -21,8 +21,23 @@ const Navbar = () => {
           {isAuthenticated ? (
             <>
               <Link to="/dashboard" style={styles.link}>Dashboard</Link>
-              <Link to="/products" style={styles.link}>Products</Link>
-              <Link to="/trace" style={styles.link}>Trace</Link>
+              
+              {/* Show different menu items based on role */}
+              {user?.role === 'consumer' ? (
+                <>
+                  <Link to="/scan" style={styles.link}>🔍 Scan QR</Link>
+                  <Link to="/trace" style={styles.link}>Trace Products</Link>
+                </>
+              ) : (
+                <>
+                  {(user?.role === 'farmer' || user?.role === 'manufacturer' || user?.role === 'admin') && (
+                    <Link to="/products/create" style={styles.link}>➕ Add Product</Link>
+                  )}
+                  <Link to="/products" style={styles.link}>Products</Link>
+                  <Link to="/trace" style={styles.link}>Trace</Link>
+                </>
+              )}
+              
               <Link to="/profile" style={styles.link}>Profile</Link>
               <div style={styles.userInfo}>
                 <span style={styles.userName}>{user?.name}</span>
