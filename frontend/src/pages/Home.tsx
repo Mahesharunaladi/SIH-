@@ -1,94 +1,167 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Home = () => {
+  const { isAuthenticated } = useAuth();
+
   return (
     <div style={styles.container}>
+      {/* Hero Section with Botanical Background */}
       <div style={styles.hero}>
-        <h1 style={styles.heroTitle}>🌿 HerbTrace</h1>
-        <p style={styles.heroSubtitle}>
-          Blockchain-based Botanical Traceability System
-        </p>
-        <p style={styles.heroDescription}>
-          Track medicinal herbs and botanical products from farm to pharmacy with
-          transparency, authenticity, and trust powered by blockchain technology.
-        </p>
-        <div style={styles.heroButtons}>
-          <Link to="/register" style={styles.primaryButton}>
-            Get Started
-          </Link>
-          <Link to="/login" style={styles.secondaryButton}>
-            Login
-          </Link>
+        <div style={styles.heroOverlay} />
+        <div style={styles.heroContent}>
+          <div style={styles.heroBadge}>
+            <span style={styles.badgeIcon}>🔒</span>
+            <span>Blockchain-Verified Traceability</span>
+          </div>
+          <h1 style={styles.heroTitle}>
+            From Soil to Soul,
+            <br />
+            <span style={styles.heroGolden}>Traced & Trusted</span>
+          </h1>
+          <p style={styles.heroDescription}>
+            HerbTrace brings full transparency to Ayurvedic supply chains
+            <br />
+            with blockchain-anchored geo-tagging from collection to your
+            <br />
+            medicine cabinet.
+          </p>
+          <div style={styles.heroButtons}>
+            {isAuthenticated ? (
+              <Link to="/dashboard" style={styles.orangeButton}>
+                <span style={styles.buttonIcon}>📱</span>
+                <span>Go to Dashboard</span>
+                <span style={styles.buttonArrow}>→</span>
+              </Link>
+            ) : (
+              <>
+                <Link to="/scan" style={styles.orangeButton}>
+                  <span style={styles.buttonIcon}>📱</span>
+                  <span>Scan & Verify</span>
+                  <span style={styles.buttonArrow}>→</span>
+                </Link>
+                <Link to="/login" style={styles.whiteButton}>
+                  Sign In
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </div>
 
-      <div style={styles.features}>
-        <h2 style={styles.featuresTitle}>Key Features</h2>
+      {/* How HerbTrace Works Section */}
+      <div style={styles.howItWorks}>
+        <h2 style={styles.sectionTitle}>How HerbTrace Works</h2>
+        <p style={styles.sectionSubtitle}>
+          End-to-end botanical traceability powered by blockchain and
+          <br />
+          geo-intelligence.
+        </p>
+        
         <div style={styles.featuresGrid}>
           <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>🔗</div>
-            <h3 style={styles.featureTitle}>Blockchain Security</h3>
+            <div style={styles.featureIconBox}>
+              <span style={styles.featureIcon}>📍</span>
+            </div>
+            <h3 style={styles.featureTitle}>Geo-Tagged Origins</h3>
             <p style={styles.featureDescription}>
-              All supply chain events are permanently recorded on the blockchain,
-              ensuring tamper-proof traceability.
+              Every herb is tagged with precise GPS coordinates from the point of collection.
             </p>
           </div>
 
           <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>📍</div>
-            <h3 style={styles.featureTitle}>Geo-tagging</h3>
+            <div style={styles.featureIconBox}>
+              <span style={styles.featureIcon}>�</span>
+            </div>
+            <h3 style={styles.featureTitle}>Blockchain Anchored</h3>
             <p style={styles.featureDescription}>
-              Track the exact location and journey of botanical products from origin
-              to destination.
+              SHA-256 hashed events with immutable on-chain proofs prevent any tampering.
             </p>
           </div>
 
           <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>📱</div>
-            <h3 style={styles.featureTitle}>QR Code Scanning</h3>
+            <div style={styles.featureIconBox}>
+              <span style={styles.featureIcon}>📱</span>
+            </div>
+            <h3 style={styles.featureTitle}>QR Verification</h3>
             <p style={styles.featureDescription}>
-              Scan QR codes to instantly verify product authenticity and view complete
-              supply chain history.
+              Scan any product label to instantly view its complete journey and authenticity.
             </p>
           </div>
 
           <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>✅</div>
-            <h3 style={styles.featureTitle}>Quality Assurance</h3>
+            <div style={styles.featureIconBox}>
+              <span style={styles.featureIcon}>📊</span>
+            </div>
+            <h3 style={styles.featureTitle}>Supply Chain Analytics</h3>
             <p style={styles.featureDescription}>
-              Verify certifications, quality checks, and compliance at every stage of
-              the supply chain.
-            </p>
-          </div>
-
-          <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>👥</div>
-            <h3 style={styles.featureTitle}>Multi-stakeholder</h3>
-            <p style={styles.featureDescription}>
-              Connect farmers, processors, manufacturers, distributors, retailers, and
-              consumers.
-            </p>
-          </div>
-
-          <div style={styles.featureCard}>
-            <div style={styles.featureIcon}>📊</div>
-            <h3 style={styles.featureTitle}>Analytics</h3>
-            <p style={styles.featureDescription}>
-              Gain insights into supply chain efficiency, product journey times, and
-              quality metrics.
+              Real-time dashboards for every stakeholder from farm to shelf.
             </p>
           </div>
         </div>
       </div>
 
-      <div style={styles.cta}>
-        <h2 style={styles.ctaTitle}>Ready to Transform Your Supply Chain?</h2>
-        <p style={styles.ctaDescription}>
-          Join HerbTrace today and bring transparency to botanical traceability.
+      {/* Choose Your Role Section */}
+      <div style={styles.rolesSection}>
+        <h2 style={styles.sectionTitle}>Choose Your Role</h2>
+        <p style={styles.sectionSubtitle}>
+          Different dashboards for every stakeholder in the supply chain.
         </p>
-        <Link to="/register" style={styles.ctaButton}>
-          Create Free Account
-        </Link>
+        
+        <div style={styles.rolesGrid}>
+          <div style={styles.roleCard}>
+            <div style={styles.roleIconBox}>
+              <span style={styles.roleIcon}>🌱</span>
+            </div>
+            <h3 style={styles.roleTitle}>Farmer / Collector</h3>
+            <p style={styles.roleDescription}>
+              Submit harvests with geo-tags and track your produce through the chain.
+            </p>
+            <Link to="/register" style={styles.roleLink}>
+              Open Dashboard <span style={styles.roleLinkArrow}>→</span>
+            </Link>
+          </div>
+
+          <div style={styles.roleCard}>
+            <div style={styles.roleIconBox}>
+              <span style={styles.roleIcon}>📦</span>
+            </div>
+            <h3 style={styles.roleTitle}>Manufacturer</h3>
+            <p style={styles.roleDescription}>
+              Create batches, generate QR labels, and anchor processing events.
+            </p>
+            <Link to="/register" style={styles.roleLink}>
+              Open Dashboard <span style={styles.roleLinkArrow}>→</span>
+            </Link>
+          </div>
+
+          <div style={styles.roleCard}>
+            <div style={styles.roleIconBox}>
+              <span style={styles.roleIcon}>📱</span>
+            </div>
+            <h3 style={styles.roleTitle}>Consumer</h3>
+            <p style={styles.roleDescription}>
+              Scan a QR code or enter a product ID to verify the complete journey.
+            </p>
+            <Link to="/scan" style={styles.roleLink}>
+              Open Dashboard <span style={styles.roleLinkArrow}>→</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div style={styles.cta}>
+        <div style={styles.ctaContent}>
+          <h2 style={styles.ctaTitle}>Start Tracing with HerbTrace</h2>
+          <p style={styles.ctaDescription}>
+            Join the transparent Ayurvedic supply chain revolution
+          </p>
+          <Link to="/register" style={styles.ctaButton}>
+            <span>Get Started Today</span>
+            <span style={styles.buttonArrow}>→</span>
+          </Link>
+        </div>
       </div>
     </div>
   );
@@ -97,116 +170,254 @@ const Home = () => {
 const styles: { [key: string]: React.CSSProperties } = {
   container: {
     minHeight: '100vh',
+    background: 'linear-gradient(135deg, #f7fafc 0%, #e2e8f0 100%)',
   },
   hero: {
-    backgroundColor: '#2d3748',
+    background: 'linear-gradient(135deg, #2d3748 0%, #1a202c 100%)',
     color: 'white',
-    padding: '6rem 2rem',
+    padding: '5rem 2rem 6rem',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  heroContent: {
+    maxWidth: '1200px',
+    margin: '0 auto',
     textAlign: 'center',
+    position: 'relative',
+    zIndex: 1,
+  },
+  heroBadge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    padding: '0.5rem 1.25rem',
+    background: 'rgba(255, 255, 255, 0.1)',
+    borderRadius: '50px',
+    fontSize: '0.9rem',
+    fontWeight: '600',
+    marginBottom: '2rem',
+    backdropFilter: 'blur(10px)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+  },
+  badgeIcon: {
+    fontSize: '1.2rem',
   },
   heroTitle: {
-    fontSize: '3.5rem',
-    marginBottom: '1rem',
+    fontSize: 'clamp(2.5rem, 5vw, 4rem)',
+    fontWeight: '800',
+    marginBottom: '1.5rem',
+    lineHeight: '1.2',
+  },
+  heroGradient: {
+    background: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
   },
   heroSubtitle: {
-    fontSize: '1.5rem',
-    marginBottom: '1rem',
-    opacity: 0.9,
-  },
-  heroDescription: {
-    fontSize: '1.1rem',
+    fontSize: 'clamp(1.1rem, 2vw, 1.3rem)',
     maxWidth: '800px',
-    margin: '0 auto 2rem',
-    opacity: 0.8,
-    lineHeight: '1.6',
+    margin: '0 auto 2.5rem',
+    opacity: 0.95,
+    lineHeight: '1.7',
   },
   heroButtons: {
     display: 'flex',
     gap: '1rem',
     justifyContent: 'center',
-    marginTop: '2rem',
+    flexWrap: 'wrap',
+    marginBottom: '3rem',
   },
   primaryButton: {
-    backgroundColor: '#48bb78',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    background: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
     color: 'white',
     padding: '1rem 2rem',
-    borderRadius: '8px',
+    borderRadius: '12px',
     textDecoration: 'none',
-    fontWeight: '600',
+    fontWeight: '700',
     fontSize: '1.1rem',
-    transition: 'transform 0.2s',
+    boxShadow: '0 10px 25px rgba(72, 187, 120, 0.3)',
+    transition: 'all 0.3s ease',
   },
   secondaryButton: {
-    backgroundColor: 'transparent',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    background: 'rgba(255, 255, 255, 0.1)',
     color: 'white',
     padding: '1rem 2rem',
-    borderRadius: '8px',
+    borderRadius: '12px',
     textDecoration: 'none',
-    fontWeight: '600',
+    fontWeight: '700',
     fontSize: '1.1rem',
-    border: '2px solid white',
-    transition: 'transform 0.2s',
+    border: '2px solid rgba(255, 255, 255, 0.3)',
+    backdropFilter: 'blur(10px)',
+    transition: 'all 0.3s ease',
+  },
+  buttonArrow: {
+    fontSize: '1.5rem',
+    transition: 'transform 0.3s ease',
+  },
+  stats: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: '2rem',
+    flexWrap: 'wrap',
+    marginTop: '3rem',
+    padding: '2rem',
+    background: 'rgba(255, 255, 255, 0.05)',
+    borderRadius: '16px',
+    backdropFilter: 'blur(10px)',
+    maxWidth: '700px',
+    margin: '3rem auto 0',
+  },
+  statItem: {
+    textAlign: 'center',
+  },
+  statNumber: {
+    fontSize: '2rem',
+    fontWeight: '800',
+    color: '#48bb78',
+    marginBottom: '0.25rem',
+  },
+  statLabel: {
+    fontSize: '0.9rem',
+    opacity: 0.8,
+  },
+  statDivider: {
+    width: '2px',
+    height: '40px',
+    background: 'rgba(255, 255, 255, 0.2)',
   },
   features: {
+    padding: '6rem 2rem',
     maxWidth: '1200px',
     margin: '0 auto',
-    padding: '4rem 2rem',
+  },
+  featuresHeader: {
+    textAlign: 'center',
+    marginBottom: '4rem',
+  },
+  sectionBadge: {
+    display: 'inline-block',
+    padding: '0.5rem 1rem',
+    background: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
+    color: 'white',
+    borderRadius: '50px',
+    fontSize: '0.875rem',
+    fontWeight: '600',
+    marginBottom: '1rem',
   },
   featuresTitle: {
-    fontSize: '2.5rem',
-    textAlign: 'center',
-    marginBottom: '3rem',
+    fontSize: 'clamp(2rem, 4vw, 3rem)',
     color: '#2d3748',
+    marginBottom: '1rem',
+    fontWeight: '800',
+  },
+  featuresSubtitle: {
+    fontSize: '1.2rem',
+    color: '#718096',
+    maxWidth: '600px',
+    margin: '0 auto',
   },
   featuresGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
     gap: '2rem',
   },
   featureCard: {
-    backgroundColor: 'white',
-    padding: '2rem',
-    borderRadius: '8px',
-    boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-    textAlign: 'center',
+    background: 'white',
+    padding: '2.5rem',
+    borderRadius: '16px',
+    boxShadow: '0 4px 6px rgba(0,0,0,0.05)',
+    transition: 'all 0.3s ease',
+    border: '2px solid transparent',
+    cursor: 'pointer',
+  },
+  featureCard1: {
+    borderColor: 'rgba(72, 187, 120, 0.2)',
+  },
+  featureCard2: {
+    borderColor: 'rgba(66, 153, 225, 0.2)',
+  },
+  featureCard3: {
+    borderColor: 'rgba(237, 137, 54, 0.2)',
   },
   featureIcon: {
     fontSize: '3rem',
-    marginBottom: '1rem',
+    marginBottom: '1.5rem',
+    display: 'inline-block',
   },
   featureTitle: {
     fontSize: '1.5rem',
     color: '#2d3748',
     marginBottom: '1rem',
+    fontWeight: '700',
   },
   featureDescription: {
+    fontSize: '1rem',
     color: '#718096',
-    lineHeight: '1.6',
+    lineHeight: '1.7',
+    marginBottom: '1.5rem',
+  },
+  featureHighlight: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    padding: '0.5rem 1rem',
+    background: '#f0fff4',
+    color: '#22543d',
+    borderRadius: '8px',
+    fontSize: '0.875rem',
+    fontWeight: '600',
+  },
+  checkIcon: {
+    color: '#48bb78',
+    fontWeight: 'bold',
   },
   cta: {
-    backgroundColor: '#48bb78',
+    background: 'linear-gradient(135deg, #2d3748 0%, #1a202c 100%)',
     color: 'white',
-    padding: '4rem 2rem',
+    padding: '5rem 2rem',
     textAlign: 'center',
   },
+  ctaContent: {
+    maxWidth: '800px',
+    margin: '0 auto',
+  },
   ctaTitle: {
-    fontSize: '2.5rem',
-    marginBottom: '1rem',
+    fontSize: 'clamp(2rem, 4vw, 3rem)',
+    marginBottom: '1.5rem',
+    fontWeight: '800',
   },
   ctaDescription: {
     fontSize: '1.2rem',
-    marginBottom: '2rem',
+    marginBottom: '2.5rem',
     opacity: 0.9,
+    lineHeight: '1.7',
   },
   ctaButton: {
-    backgroundColor: 'white',
-    color: '#48bb78',
-    padding: '1rem 2rem',
-    borderRadius: '8px',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.75rem',
+    background: 'linear-gradient(135deg, #48bb78 0%, #38a169 100%)',
+    color: 'white',
+    padding: '1.25rem 2.5rem',
+    borderRadius: '12px',
     textDecoration: 'none',
-    fontWeight: '600',
-    fontSize: '1.1rem',
-    display: 'inline-block',
+    fontWeight: '700',
+    fontSize: '1.2rem',
+    boxShadow: '0 10px 25px rgba(72, 187, 120, 0.3)',
+    transition: 'all 0.3s ease',
+  },
+  ctaNote: {
+    marginTop: '1.5rem',
+    fontSize: '0.9rem',
+    opacity: 0.7,
   },
 };
 
