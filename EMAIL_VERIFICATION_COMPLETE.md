@@ -135,7 +135,11 @@ Successfully implemented a complete email verification system for the HerbTrace 
 - Added route: `/verify-email` → `VerifyEmail` component
 
 ### 6. Styling
-- **File**: `/frontend/src/App.css`
+- **File**: `/frontend/src/App.css`EMAIL_USER=your_email@gmail.com
+EMAIL_PASSWORD=your_16_char_app_password
+FRONTEND_URL=http://localhost:5175EMAIL_USER=your_email@gmail.com
+EMAIL_PASSWORD=your_16_char_app_password
+FRONTEND_URL=http://localhost:5175
 - Added comprehensive verification page styles:
   - `.page-container` - Full-page centered layout
   - `.auth-container` - Responsive wrapper
