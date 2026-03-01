@@ -587,4 +587,3 @@ npm run dev
 
 ---
 
-**Built with ❤️ for Smart India Hackathon**
